@@ -6,16 +6,23 @@
 
 #include <iostream>
 
+const unsigned int WIDTH = 800;
+const unsigned int HEIGHT = 600;
+
+float mixValue = 0.2f;
+
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
 	glViewport(0, 0, width, height);
 }
 void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
-}
 
-const unsigned int WIDTH = 800;
-const unsigned int HEIGHT = 600;
+	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) 
+		mixValue >= 1 ? mixValue = 1 : mixValue += 0.01f;
+	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
+		mixValue <= 0 ? mixValue = 0 : mixValue -= 0.01f;
+}
 
 int main() {
 	// Initializing and configure
@@ -144,6 +151,9 @@ int main() {
 		glBindTexture(GL_TEXTURE_2D, texture1);
 		glActiveTexture(GL_TEXTURE1);
 		glBindTexture(GL_TEXTURE_2D, texture2);
+
+		// set the mixValue
+		ourShader.setFloat("mixValue", mixValue);
 
 		// render the triangle
 		ourShader.use();
