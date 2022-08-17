@@ -21,7 +21,7 @@ void processInput(GLFWwindow* window) {
 	if (glfwGetKey(window, GLFW_KEY_UP) == GLFW_PRESS) 
 		mixValue >= 1 ? mixValue = 1 : mixValue += 0.01f;
 	if (glfwGetKey(window, GLFW_KEY_DOWN) == GLFW_PRESS)
-		mixValue <= 0 ? mixValue = 0 : mixValue -= 0.01f;
+		mixValue <= -1 ? mixValue = -1 : mixValue -= 0.01f;
 }
 
 int main() {
