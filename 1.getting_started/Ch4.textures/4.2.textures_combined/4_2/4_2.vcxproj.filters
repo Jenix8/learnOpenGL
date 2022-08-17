@@ -26,14 +26,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="shader.fs">
-      <Filter>리소스 파일</Filter>
-    </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="shader.vs">
-      <Filter>리소스 파일</Filter>
-    </None>
     <None Include="texture.vs">
       <Filter>리소스 파일</Filter>
     </None>
@@ -45,7 +37,7 @@
     <ClInclude Include="shader.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\..\..\stb_image.h">
+    <ClInclude Include="..\..\..\..\include\stb_image.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
