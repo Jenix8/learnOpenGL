@@ -262,4 +262,6 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 
+include/
+lib/
 *.VC.*

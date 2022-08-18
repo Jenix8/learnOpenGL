@@ -47,7 +47,7 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	// build and compile our shader program
-	Shader ourShader("coord_sys.vs", "coord_sys.fs");
+	Shader ourShader("camera.vs", "camera.fs");
 
 	// set up vertex data (and buffer(s)) and configure vertex attributes
 	float vertices[] = {
@@ -175,6 +175,8 @@ int main() {
 	//ourShader.setInt("texture1", 1);
 	ourShader.setInt("texture2", 1);
 
+	float radius = 10.0f;
+	float camX, camZ;
 	// render loop
 	while (!glfwWindowShouldClose(window))
 	{
@@ -196,8 +198,10 @@ int main() {
 		ourShader.use();
 
 		// create transformations
-		glm::mat4 view = glm::mat4(1.0f);
-		view = glm::translate(view, glm::vec3(0.0f, 0.0f, -3.0f));
+		camX = sin(glfwGetTime()) * radius;
+		camZ = cos(glfwGetTime()) * radius;
+		glm::mat4 view;
+		view = glm::lookAt(glm::vec3(camX, 0.0, camZ), glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 1.0, 0.0));
 
 		glm::mat4 projection = glm::mat4(1.0f);
 		projection = glm::perspective(glm::radians(45.0f), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
@@ -211,7 +215,7 @@ int main() {
 			model = glm::translate(model, cubePositions[i]);
 			float angle = 20.0f * i;
 			// Exercise 3
-			if (i % 3 == 0) angle = glfwGetTime() * 20.0f;
+			//if (i % 3 == 0) angle = glfwGetTime() * 20.0f;
 			model = glm::rotate(model, glm::radians(angle), glm::vec3(1.0f, 0.3f, 0.5f));
 			ourShader.setMat4("model", model);
 
