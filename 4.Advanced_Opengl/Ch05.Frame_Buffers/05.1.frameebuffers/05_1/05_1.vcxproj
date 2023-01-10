@@ -78,11 +78,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <LibraryPath>D:\OnlyLab\LearnOpengl\01_1\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\OnlyLab\LearnOpengl\05_1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <LibraryPath>D:\OnlyLab\LearnOpengl\01_1\lib;$(LibraryPath)</LibraryPath>
+    <LibraryPath>D:\OnlyLab\LearnOpengl\05_1\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -156,8 +156,8 @@
     <ClCompile Include="stb_image.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="depth_testing.fs" />
-    <None Include="depth_testing.vs" />
+    <None Include="blending.fs" />
+    <None Include="blending.vs" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\..\..\include\stb_image.h" />
