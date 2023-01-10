@@ -26,10 +26,16 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="blending.fs">
+    <None Include="framebuffers.fs">
       <Filter>리소스 파일</Filter>
     </None>
-    <None Include="blending.vs">
+    <None Include="framebuffers.vs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="screen.fs">
+      <Filter>리소스 파일</Filter>
+    </None>
+    <None Include="screen.vs">
       <Filter>리소스 파일</Filter>
     </None>
   </ItemGroup>
