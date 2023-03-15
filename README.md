@@ -1,4 +1,4 @@
-# learnOpenGL
+# LearnOpenGL
 
 reference 
 
