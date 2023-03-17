@@ -21,14 +21,11 @@ const unsigned int WIDTH = 800;
 const unsigned int HEIGHT = 600;
 
 // camera setup
-Camera camera(glm::vec3(0.0f, 0.0f, 3.0f));
+Camera camera(glm::vec3(0.0f, 1.0f, 5.0f));
 float lastX = WIDTH / 2.0f;
 float lastY = HEIGHT / 2.0f;
 bool firstMouse = true;
-
-// timing
-float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+float deltaTime = 1 / 60.f;
 
 // lighting 
 glm::vec3 lightPos(1.2f, 1.0f, 2.0f);
@@ -62,31 +59,34 @@ int main() {
 	glEnable(GL_DEPTH_TEST);
 
 	Shader shader("model_loading.vs", "model_loading.fs");
-	Model backpack("backpack/backpack.obj");
-	//Model backpack("bunny_lowpoly.obj");
+	Model backpack("assets/backpack.obj");
+
+	shader.use(); 
+	shader.setInt("material.diffuse", 0); 
+	shader.setInt("material.specular", 1); 
+	glm::mat4 model = glm::mat4(1.0f);
 
 	// render loop
 	while (!glfwWindowShouldClose(window))
 	{
-		float currentFrame = static_cast<float>(glfwGetTime());
-		deltaTime = currentFrame - lastFrame;
-		lastFrame = currentFrame;
-
 		processInput(window);
 
 		glClearColor(0.3f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-		shader.use();
-
 		glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)WIDTH / (float)HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = camera.GetViewMatrix();
+
+		shader.use();
+		shader.setVec3("light.direction", -0.2f, -1.0f, -0.3f);
+		shader.setVec3("viewPos", camera.Position);
+
+		shader.setVec3("light.ambient", 0.2f, 0.2f, 0.2f);
+		shader.setVec3("light.diffuse", 0.5f, 0.5f, 0.5f);
+		shader.setVec3("light.specular", 1.0f, 1.0f, 1.0f);
+		shader.setFloat("material.shininess", 32.0f);
 		shader.setMat4("projection", projection);
 		shader.setMat4("view", view);
-
-		glm::mat4 model = glm::mat4(1.0f);
-		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); 
-		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));	
 		shader.setMat4("model", model);
 		backpack.Draw(shader);
 
